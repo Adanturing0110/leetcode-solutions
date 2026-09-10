@@ -14,36 +14,17 @@ class Solution {
             sCount[s.charAt(i) - 'a']++;
         }
 
-        int matches = 0;
-        for (int c = 0; c < 26; c++) {
-            if (sCount[c] == pCount[c]) {
-                matches++;
-            }
-        }
-
-        if (matches == 26) {
+        if (Arrays.equals(pCount, sCount)) {
             result.add(0);
         }
 
         for (int i = pLen; i < sLen; i++) {
-            int addChar = s.charAt(i) - 'a';
-            int removeChar = s.charAt(i - pLen) - 'a';
+            // add new char entering window
+            sCount[s.charAt(i) - 'a']++;
+            // remove char leaving window
+            sCount[s.charAt(i - pLen) - 'a']--;
 
-            sCount[addChar]++;
-            if (sCount[addChar] == pCount[addChar]) {
-                matches++;
-            } else if (sCount[addChar] == pCount[addChar] + 1) {
-                matches--;
-            }
-
-            sCount[removeChar]--;
-            if (sCount[removeChar] == pCount[removeChar]) {
-                matches++;
-            } else if (sCount[removeChar] == pCount[removeChar] - 1) {
-                matches--;
-            }
-
-            if (matches == 26) {
+            if (Arrays.equals(pCount, sCount)) {
                 result.add(i - pLen + 1);
             }
         }
