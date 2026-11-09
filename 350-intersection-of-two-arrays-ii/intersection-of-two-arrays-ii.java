@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         if (nums1.length > nums2.length) {
-            return intersect(nums2, nums1); // map the smaller array
+            return intersect(nums2, nums1); 
         }
 
         Map<Integer, Integer> freq = new HashMap<>();
